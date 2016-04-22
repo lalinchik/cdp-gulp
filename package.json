@@ -4,6 +4,7 @@
   "description": "Step-by-step example of introducing Gulp into project",
   "scripts": {
     "build": "gulp build",
+    "build:prod": "gulp build --env=production",
     "watch": "gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,10 +27,15 @@
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-bower": "0.0.13",
     "gulp-cached": "^1.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-if": "^2.0.0",
     "gulp-less": "^3.0.5",
     "gulp-remember": "^0.3.1",
-    "gulp-util": "^3.0.7"
+    "gulp-util": "^3.0.7",
+    "minimist": "^1.2.0"
   }
 }

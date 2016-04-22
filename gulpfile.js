@@ -5,6 +5,15 @@ var del = require('del');
 var util = require('gulp-util');
 var cached = require('gulp-cached');
 var remember = require('gulp-remember');
+var autoprefixer = require('gulp-autoprefixer');
+var csso = require('gulp-csso');
+var concat = require('gulp-concat');
+var gulpif = require('gulp-if');
+
+var argv = require('minimist')(process.argv.slice(2), {
+    string: 'env',
+    default: { env: process.env.NODE_ENV || 'development' }
+});
 
 var conf = {
     less: 'src/less/*.less',
@@ -27,16 +36,22 @@ gulp.task('bower', function () {
 });
 
 gulp.task('style', ['bower', 'clean'], function () {
-    return gulp.src([conf.less, bootstrap.less])
+    return gulp.src([bootstrap.less, conf.less])
         .pipe(less())
-        .pipe(gulp.dest(conf.build.css))
+        .pipe(autoprefixer(['last 2 version']))
+        .pipe(concat('cdp.css'))
+        // Compress code only on production build
+        .pipe(gulpif(argv.env === 'production', csso()))
+        .pipe(gulp.dest(conf.build.css));
 });
 
 gulp.task('style-watch', function () {
-    return gulp.src([conf.less, bootstrap.less])
+    return gulp.src([bootstrap.less, conf.less])
         .pipe(cached())
         .pipe(less())
         .on('error', errorHandler)
+        .pipe(autoprefixer(['last 2 version']))
+        .pipe(concat('cdp.css'))
         .pipe(remember())
         .pipe(gulp.dest(conf.build.css))
 });

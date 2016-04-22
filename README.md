@@ -91,3 +91,13 @@ Rebuilding only changed files is one of main ways to optimize build time.
 Moving call for main Gulp tasks to npm scripts will allow us to remove dependency on global Gulp package.
 
 Use `npm run build` to build project and `npm run watch` to start watcher.
+
+### 07-postprocessing-and-optimizations
+
+Further optimization for generated CSS - vendor prefixes, concatenation and minification.
+
+Minification is applied only for production builds to save time on developers machines.
+
+You can run build with minigication by adding argument `--env production` when invoking gulp. See `build:prod` as example.
+
+> NOTE: Order of patterns for `gulp.src()` should follow files cascade in expected result.
