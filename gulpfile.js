@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var bower = require('gulp-bower');
 var less = require('gulp-less');
 var del = require('del');
+var util = require('gulp-util');
 
 var conf = {
     less: 'src/less/*.less',
@@ -23,15 +24,18 @@ gulp.task('bower', function () {
         .pipe(gulp.dest('bower_components'));
 });
 
-var compileStyles = function () {
+gulp.task('style', ['bower', 'clean'], function () {
     return gulp.src([conf.less, bootstrap.less])
         .pipe(less())
         .pipe(gulp.dest(conf.build.css))
-};
+});
 
-gulp.task('style', ['bower', 'clean'], compileStyles);
-
-gulp.task('style-watch', compileStyles);
+gulp.task('style-watch', function () {
+    return gulp.src([conf.less, bootstrap.less])
+        .pipe(less())
+        .on('error', errorHandler)
+        .pipe(gulp.dest(conf.build.css))
+});
 
 gulp.task('images', ['clean'], function () {
    return gulp.src(conf.images)
@@ -47,3 +51,9 @@ gulp.task('build', ['style', 'images']);
 gulp.task('watch', ['build'], function () {
     gulp.watch(conf.less, ['style-watch']);
 });
+
+function errorHandler(error) {
+    util.log(util.colors.red('Error'), error.message);
+
+    this.end();
+}

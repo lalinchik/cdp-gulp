@@ -71,3 +71,13 @@ It is good practice to clean results of previous builds to avoid redundant files
 ### 04-watch-task
 
 Added watcher for LESS files. Separate style tasks are required to avoid installation of Bower components and cleaning on every change.
+
+### 05-error-handling
+
+If you or your IDE saves less file ith syntax errors in less file whole watcher process will be stopped.
+Developer should manually catch and handle errors to avoid exit from watcher.
+
+> NOTE: Make sure that you intercept errors only in watcher tasks, and build/release tasks will properly exit with error code.
+Otherwise you may get broken builds.
+
+Also see: [Combining streams to handle errors](http://gulpjs.org/recipes/combining-streams-to-handle-errors.html)
