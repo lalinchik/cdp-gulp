@@ -63,3 +63,7 @@ You can also uninstall global Bower package and test with local installation via
 ```sh
 $ npm uninstall --global bower
 ```
+
+### 03-clean-task
+
+It is good practice to clean results of previous builds to avoid redundant files that may cause new or hide actual problems.
