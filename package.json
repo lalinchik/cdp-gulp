@@ -1,0 +1,22 @@
+{
+  "name": "cdp-gulp",
+  "version": "1.0.0",
+  "description": "Step-by-step example of introducing Gulp into project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IllusionMH/cdp-gulp.git"
+  },
+  "keywords": [
+    "gulp",
+    "tutorial",
+    "introduction",
+    "cdp",
+    "epam"
+  ],
+  "author": "Andrii Dieiev",
+  "contributors": ["Valerii Pavlov"],
+  "license": "MIT"
+}
