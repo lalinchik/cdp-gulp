@@ -115,3 +115,7 @@ Finally we should add JS build task. Because we will use scripts from `build` fo
 Also now optimizations for styles/scripts/images are applied only for production builds.
 
 As result we have build folder which can be moved to any server and work independently from source files.
+
+---
+
+This projects is based on Valerii Pavlov work.
