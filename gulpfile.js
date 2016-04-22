@@ -23,11 +23,15 @@ gulp.task('bower', function () {
         .pipe(gulp.dest('bower_components'));
 });
 
-gulp.task('style', ['bower', 'clean'], function () {
+var compileStyles = function () {
     return gulp.src([conf.less, bootstrap.less])
         .pipe(less())
         .pipe(gulp.dest(conf.build.css))
-});
+};
+
+gulp.task('style', ['bower', 'clean'], compileStyles);
+
+gulp.task('style-watch', compileStyles);
 
 gulp.task('images', ['clean'], function () {
    return gulp.src(conf.images)
@@ -39,3 +43,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', ['style', 'images']);
+
+gulp.task('watch', ['build'], function () {
+    gulp.watch(conf.less, ['style-watch']);
+});
