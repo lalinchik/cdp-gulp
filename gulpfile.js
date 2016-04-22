@@ -9,6 +9,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var csso = require('gulp-csso');
 var concat = require('gulp-concat');
 var gulpif = require('gulp-if');
+var imagemin = require('gulp-imagemin');
+var spritesmith = require('gulp.spritesmith');
 
 var argv = require('minimist')(process.argv.slice(2), {
     string: 'env',
@@ -17,13 +19,19 @@ var argv = require('minimist')(process.argv.slice(2), {
 
 var conf = {
     less: 'src/less/*.less',
-    images: 'src/images/*.{png,svg}',
+    images: ['src/images/**/*.{png,svg}', '!src/images/icons/**'],
+    icons: 'src/images/icons/*.png',
+    sprite: {
+        imgName: 'images/build/sprite.png',
+        cssName: 'less/build/sprite.less',
+        imgPath: '../images/build/sprite.png'
+    },
     build: {
+        tmpFolders: '**/build',
         folder: 'build',
         css: 'build/css',
         images: 'build/images'
     }
-
 };
 
 var bootstrap = {
@@ -35,7 +43,7 @@ gulp.task('bower', function () {
         .pipe(gulp.dest('bower_components'));
 });
 
-gulp.task('style', ['bower', 'clean'], function () {
+gulp.task('style', ['clean', 'bower', 'images'], function () {
     return gulp.src([bootstrap.less, conf.less])
         .pipe(less())
         .pipe(autoprefixer(['last 2 version']))
@@ -56,13 +64,20 @@ gulp.task('style-watch', function () {
         .pipe(gulp.dest(conf.build.css))
 });
 
-gulp.task('images', ['clean'], function () {
-   return gulp.src(conf.images)
+gulp.task('images', ['clean', 'bower', 'sprite'], function () {
+    return gulp.src(conf.images)
+        .pipe(imagemin())
         .pipe(gulp.dest(conf.build.images))
 });
 
+gulp.task('sprite', ['clean'], function () {
+    return gulp.src(conf.icons)
+        .pipe(spritesmith(conf.sprite))
+        .pipe(gulp.dest('src/'));
+});
+
 gulp.task('clean', function () {
-    return del([conf.build.folder]);
+    return del([conf.build.folder, conf.build.tmpFolders]);
 });
 
 gulp.task('build', ['style', 'images']);

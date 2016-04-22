@@ -101,3 +101,10 @@ Minification is applied only for production builds to save time on developers ma
 You can run build with minigication by adding argument `--env production` when invoking gulp. See `build:prod` as example.
 
 > NOTE: Order of patterns for `gulp.src()` should follow files cascade in expected result.
+
+### 08-sprites-and-images-optimizations
+
+Next example shows how to build sprites with `gulp.spritesmith` plugin and put optimized images into `build/images` folder.
+
+Also we have to update tasks dependencies to preserve proper order and generate sprites before we optimize images and processing LESS.
+
