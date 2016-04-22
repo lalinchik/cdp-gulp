@@ -85,3 +85,9 @@ Also see: [Combining streams to handle errors](http://gulpjs.org/recipes/combini
 ### 05-incremental-builds
 
 Rebuilding only changed files is one of main ways to optimize build time.
+
+### 06-run-via-npm
+
+Moving call for main Gulp tasks to npm scripts will allow us to remove dependency on global Gulp package.
+
+Use `npm run build` to build project and `npm run watch` to start watcher.

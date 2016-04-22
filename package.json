@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Step-by-step example of introducing Gulp into project",
   "scripts": {
+    "build": "gulp build",
+    "watch": "gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
