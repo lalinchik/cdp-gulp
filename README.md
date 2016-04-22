@@ -52,3 +52,14 @@ Bootstrap framework is loaded via Bower which requires global installation.
 ```sh
 $ npm install --global bower
 ```
+
+### 02-using-less
+
+Raw CSS files replaced with LESS which allow us reuse variables/mixins that are provided by Bootstrap framework.
+Because our less compilation step depends on Bootstrap presence - it will be installed automatically during build task.
+
+You can also uninstall global Bower package and test with local installation via Gulp
+
+```sh
+$ npm uninstall --global bower
+```

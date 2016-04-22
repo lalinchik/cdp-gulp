@@ -17,6 +17,13 @@
     "epam"
   ],
   "author": "Andrii Dieiev",
-  "contributors": ["Valerii Pavlov"],
-  "license": "MIT"
+  "contributors": [
+    "Valerii Pavlov"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-bower": "0.0.13",
+    "gulp-less": "^3.0.5"
+  }
 }
