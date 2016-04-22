@@ -43,3 +43,12 @@ $ npm install --global gulp
 ### 00-initialization
 
 Initialize project and copy some source files.
+
+### 01-adding-bower
+
+Added new functionality that introduce `bootstrap` dependency.
+Bootstrap framework is loaded via Bower which requires global installation.
+
+```sh
+$ npm install --global bower
+```
