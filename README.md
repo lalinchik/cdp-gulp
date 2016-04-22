@@ -81,3 +81,7 @@ Developer should manually catch and handle errors to avoid exit from watcher.
 Otherwise you may get broken builds.
 
 Also see: [Combining streams to handle errors](http://gulpjs.org/recipes/combining-streams-to-handle-errors.html)
+
+### 05-incremental-builds
+
+Rebuilding only changed files is one of main ways to optimize build time.

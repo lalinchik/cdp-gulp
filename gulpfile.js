@@ -3,6 +3,8 @@ var bower = require('gulp-bower');
 var less = require('gulp-less');
 var del = require('del');
 var util = require('gulp-util');
+var cached = require('gulp-cached');
+var remember = require('gulp-remember');
 
 var conf = {
     less: 'src/less/*.less',
@@ -32,8 +34,10 @@ gulp.task('style', ['bower', 'clean'], function () {
 
 gulp.task('style-watch', function () {
     return gulp.src([conf.less, bootstrap.less])
+        .pipe(cached())
         .pipe(less())
         .on('error', errorHandler)
+        .pipe(remember())
         .pipe(gulp.dest(conf.build.css))
 });
 
@@ -49,7 +53,7 @@ gulp.task('clean', function () {
 gulp.task('build', ['style', 'images']);
 
 gulp.task('watch', ['build'], function () {
-    gulp.watch(conf.less, ['style-watch']);
+    return gulp.watch(conf.less, ['style-watch']);
 });
 
 function errorHandler(error) {
