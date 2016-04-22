@@ -108,3 +108,10 @@ Next example shows how to build sprites with `gulp.spritesmith` plugin and put o
 
 Also we have to update tasks dependencies to preserve proper order and generate sprites before we optimize images and processing LESS.
 
+### 09-build-scripts-and-html-files
+
+Finally we should add JS build task. Because we will use scripts from `build` folder we have to use `gulp-html-replace` plugin to replace old list of included scripts with new one for our optimized file.
+
+Also now optimizations for styles/scripts/images are applied only for production builds.
+
+As result we have build folder which can be moved to any server and work independently from source files.

@@ -11,16 +11,21 @@ var concat = require('gulp-concat');
 var gulpif = require('gulp-if');
 var imagemin = require('gulp-imagemin');
 var spritesmith = require('gulp.spritesmith');
+var htmlreplace = require('gulp-html-replace');
+var uglify = require('gulp-uglify');
+var mainBowerFiles = require('main-bower-files');
+var filter = require('gulp-filter');
 
 var argv = require('minimist')(process.argv.slice(2), {
     string: 'env',
-    default: { env: process.env.NODE_ENV || 'development' }
+    default: {env: process.env.NODE_ENV || 'development'}
 });
 
 var conf = {
     less: 'src/less/*.less',
     images: ['src/images/**/*.{png,svg}', '!src/images/icons/**'],
     icons: 'src/images/icons/*.png',
+    html: 'src/*.html',
     sprite: {
         imgName: 'images/build/sprite.png',
         cssName: 'less/build/sprite.less',
@@ -30,7 +35,9 @@ var conf = {
         tmpFolders: '**/build',
         folder: 'build',
         css: 'build/css',
-        images: 'build/images'
+        images: 'build/images',
+        js: 'build/js',
+        html: 'build/html'
     }
 };
 
@@ -66,7 +73,7 @@ gulp.task('style-watch', function () {
 
 gulp.task('images', ['clean', 'bower', 'sprite'], function () {
     return gulp.src(conf.images)
-        .pipe(imagemin())
+        .pipe(gulpif(argv.env === 'production', imagemin()))
         .pipe(gulp.dest(conf.build.images))
 });
 
@@ -76,11 +83,33 @@ gulp.task('sprite', ['clean'], function () {
         .pipe(gulp.dest('src/'));
 });
 
+gulp.task('html', ['clean'], function () {
+    return gulp.src(conf.html)
+        .pipe(htmlreplace({
+            'css': '../css/cdp.css',
+            'js': '../js/cdp.js',
+            'logo': {
+                src: '../images/logo_gray-blue_80px.svg',
+                tpl: '<img src="%s" alt="Epam logo"/>'
+            }
+        }))
+        .pipe(gulp.dest(conf.build.html));
+});
+
+gulp.task('script', ['clean', 'bower'], function () {
+    return gulp.src(mainBowerFiles({includeDev: true}))
+        .pipe(filter('**/*.js'))
+        .pipe(concat('cdp.js'))
+        .pipe(gulpif(argv.env === 'production', uglify()))
+        .pipe(gulp.dest(conf.build.js));
+});
+
+
 gulp.task('clean', function () {
     return del([conf.build.folder, conf.build.tmpFolders]);
 });
 
-gulp.task('build', ['style', 'images']);
+gulp.task('build', ['style', 'images', 'html', 'script']);
 
 gulp.task('watch', ['build'], function () {
     return gulp.watch(conf.less, ['style-watch']);
