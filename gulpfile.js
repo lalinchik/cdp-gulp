@@ -66,8 +66,8 @@ gulp.task('style-watch', function () {
         .pipe(less())
         .on('error', errorHandler)
         .pipe(autoprefixer(['last 2 version']))
-        .pipe(concat('cdp.css'))
         .pipe(remember())
+        .pipe(concat('cdp.css'))
         .pipe(gulp.dest(conf.build.css))
 });
 
