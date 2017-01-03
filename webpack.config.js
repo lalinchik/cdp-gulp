@@ -2,8 +2,11 @@ var path = require('path');
 var webpack = require('webpack');
 var SpritesmithPlugin = require('webpack-spritesmith');
 var CopyPlugin = require('copy-webpack-plugin');
+var nodeEnv = process.env.NODE_ENV;
+var production = nodeEnv && nodeEnv.indexOf('prod') > -1;
+var ImageminPlugin = require('imagemin-webpack-plugin').default;
 
-module.exports = {
+var config = {
     resolve: {
         modulesDirectories: ['node_modules', 'bower_components']
     },
@@ -16,13 +19,12 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
-            { test: /\.png$/, loader: 'file?name=images/sprite.png'},
+            {test: /\.png$/, loader: 'file?name=images/sprite.png'},
 
-            { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-            { test: /\.ttf$/,    loader: "file-loader" },
-            { test: /\.eot$/,    loader: "file-loader" },
-            { test: /\.svg$/,    loader: "file-loader" }
+            {test: /\.(woff|woff2)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff"},
+            {test: /\.ttf$/, loader: "file-loader"},
+            {test: /\.eot$/, loader: "file-loader"},
+            {test: /\.svg$/, loader: "file-loader"}
         ],
     },
     plugins: [
@@ -50,8 +52,25 @@ module.exports = {
             {from: './src/index.html'},
             {from: './src/images/logo_gray-blue_80px.svg', to: 'images/logo_gray-blue_80px.svg'},
         ]),
+        new ImageminPlugin({
+            disable: process.env.NODE_ENV !== 'prod',
+            pngquant: {
+                quality: '95-100'
+            }
+        }),
     ],
     devServer: {
         contentBase: './src'
     }
 };
+
+if (production) {
+    config.module.loaders.push({
+        test: /\.less$/,
+        loader: "style-loader!css-loader!csso-loader!autoprefixer-loader?browsers=last 2 version!less-loader"
+    });
+} else {
+    config.module.loaders.push({test: /\.less$/, loader: "style-loader!css-loader!less-loader"});
+}
+
+module.exports = config;
