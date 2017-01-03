@@ -1,12 +1,12 @@
-var path = require('path');
-var webpack = require('webpack');
-var SpritesmithPlugin = require('webpack-spritesmith');
-var CopyPlugin = require('copy-webpack-plugin');
-var nodeEnv = process.env.NODE_ENV;
-var production = nodeEnv && nodeEnv.indexOf('prod') > -1;
-var ImageminPlugin = require('imagemin-webpack-plugin').default;
+const path = require('path');
+const webpack = require('webpack');
+const SpritesmithPlugin = require('webpack-spritesmith');
+const CopyPlugin = require('copy-webpack-plugin');
+const nodeEnv = process.env.NODE_ENV;
+const production = nodeEnv && nodeEnv.indexOf('prod') > -1;
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
-var config = {
+const config = {
     resolve: {
         modulesDirectories: ['node_modules', 'bower_components']
     },

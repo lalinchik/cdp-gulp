@@ -56,5 +56,8 @@
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-spritesmith": "^0.3.1"
+  },
+  "dependencies": {
+    "jsmp-infra-string-utils": "^1.0.5"
   }
 }
