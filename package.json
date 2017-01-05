@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Step-by-step example of introducing Gulp into project",
   "scripts": {
-    "build": "webpack",
-    "build:prod": "NOVE_ENV=prod webpack --optimize-minimize",
-    "watch": "webpack-dev-server",
+    "build": "./node_modules/.bin/webpack",
+    "build:prod": "NOVE_ENV=prod ./node_modules/.bin/webpack --optimize-minimize",
+    "watch": "./node_modules/.bin/webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/**/*.js && stylelint src/**/*.less"
+    "lint": "./node_modules/.bin/eslint src/**/*.js && ./node_modules/.bin/stylelint src/**/*.less"
   },
   "repository": {
     "type": "git",
