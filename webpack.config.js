@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const SpritesmithPlugin = require('webpack-spritesmith');
 const CopyPlugin = require('copy-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV;
 const production = nodeEnv && nodeEnv.indexOf('prod') > -1;
@@ -31,7 +32,7 @@ const config = {
   },
   plugins: [
     new webpack.ResolverPlugin(
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main']),
+      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main']) //eslint-disable-line
     ),
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -43,8 +44,8 @@ const config = {
         glob: '*.png',
       },
       target: {
-        image: path.resolve(__dirname, 'src/images/build/sprite.png'),
-        css: path.resolve(__dirname, 'src/less/build/sprite.less'),
+        image: path.resolve(__dirname, 'tmp/sprite.png'),
+        css: path.resolve(__dirname, 'tmp/sprite.less'),
       },
       apiOptions: {
         cssImageRef: '~sprite.png',
@@ -59,6 +60,10 @@ const config = {
       pngquant: {
         quality: '95-100',
       },
+    }),
+    new StyleLintPlugin({
+      configFile: '.stylelintrc',
+      files: ['src/**/*.less'],
     }),
   ],
   devServer: {
