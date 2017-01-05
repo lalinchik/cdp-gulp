@@ -9,6 +9,7 @@ Repository for practice part of CDP training "Task runners".
 $ git clone git@github.com:IllusionMH/cdp-gulp.git
 ```
 ### 2. Go to created folder:
+### 2. Go to created folder:
 
 ```sh
 $ cd cdp-gulp
