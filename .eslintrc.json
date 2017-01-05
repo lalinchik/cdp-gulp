@@ -4,11 +4,8 @@
     "es6": true,
     "node": true
   },
-  "extends": "airbnb-base",
+  "extends": "airbnb",
   "parserOptions": {
     "sourceType": "module"
-  },
-  "rules": {
-    "import/no-unresolved": 0
   }
 }
