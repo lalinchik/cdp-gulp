@@ -30,6 +30,8 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "csso-loader": "^0.2.1",
+    "eslint": "^3.12.2",
+    "eslint-loader": "^1.6.1",
     "file-loader": "^0.9.0",
     "imagemin-webpack-plugin": "^1.4.4",
     "less": "^2.7.1",
@@ -39,9 +41,11 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
-    "webpack-spritesmith": "^0.3.1"
+    "webpack-spritesmith": "^0.3.1",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.2.0"
   },
   "dependencies": {
-    "jsmp-infra-string-utils": "^1.0.5"
+    "jsmp-infra-string-utils": "^1.0.7"
   }
 }
