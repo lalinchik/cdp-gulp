@@ -1,11 +1,14 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
-    },
-    "extends": "airbnb-base",
-    "parserOptions": {
-        "sourceType": "module"
-    }
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/no-unresolved": 0
+  }
 }
