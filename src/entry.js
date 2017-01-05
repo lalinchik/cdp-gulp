@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const greeting = document.querySelector('#greeting');
 
   greeting.addEventListener('click', () => {
-    console.log(utils.modify('hello, user!!!', 'upper'));
+    console.log(utils.modify('hello, user!!!', 'upper')); //eslint-disable-line
   });
 });
 
